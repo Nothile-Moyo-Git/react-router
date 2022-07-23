@@ -1,7 +1,9 @@
+import './App.scss';
+
 function App() {
   return (
-    <div>
-
+    <div className="App">
+      <a href="/" className="btn">Button</a>
     </div>
   );
 }

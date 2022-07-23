@@ -1,0 +1,5 @@
+/* Mixins such as state */
+
+@mixin state(){
+    &:hover, &:focus{   @content;   }
+}

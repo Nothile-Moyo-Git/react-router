@@ -18,5 +18,15 @@
     100%{ transform: scale(1); }
 }
 
+// Spin effect
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
 // Standard transition
 $standard_transition: all 0.15s linear;
