@@ -1,4 +1,3 @@
-import classes from './LoadingSpinner.module.css';
 import './LoadingSpinner.scss';
 
 const LoadingSpinner = () => {

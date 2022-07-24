@@ -1,8 +1,8 @@
-import classes from './QuoteItem.module.css';
+import './QuoteItem.scss';
 
 const QuoteItem = (props) => {
   return (
-    <li className={classes.item}>
+    <li className="item">
       <figure>
         <blockquote>
           <p>{props.text}</p>
