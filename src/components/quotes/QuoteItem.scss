@@ -1,3 +1,5 @@
+@import '../../styles/Shared.scss';
+
 .item {
     margin: 1rem 0;
     padding: 1rem;
@@ -30,7 +32,7 @@
         margin-bottom: 0.25rem;
     }
 
-    figcaption {
+    figcaption{
         font-style: italic;
         color: #566d6d;
     }

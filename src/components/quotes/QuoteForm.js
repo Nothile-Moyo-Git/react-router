@@ -21,22 +21,22 @@ const QuoteForm = (props) => {
 
   return (
     <Card>
-      <form className={classes.form} onSubmit={submitFormHandler}>
+      <form className="form" onSubmit={submitFormHandler}>
         {props.isLoading && (
-          <div className={classes.loading}>
+          <div className="loading">
             <LoadingSpinner />
           </div>
         )}
 
-        <div className={classes.control}>
+        <div className="control">
           <label htmlFor='author'>Author</label>
           <input type='text' id='author' ref={authorInputRef} />
         </div>
-        <div className={classes.control}>
+        <div className="control">
           <label htmlFor='text'>Text</label>
           <textarea id='text' rows='5' ref={textInputRef}></textarea>
         </div>
-        <div className={classes.actions}>
+        <div className="actions">
           <button className='btn'>Add Quote</button>
         </div>
       </form>

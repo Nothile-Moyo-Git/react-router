@@ -1,0 +1,9 @@
+@import '../../styles/Shared.scss';
+
+.comments{
+    text-align: center;
+
+    & > button{
+        font-size: 1.25rem;
+    }
+}

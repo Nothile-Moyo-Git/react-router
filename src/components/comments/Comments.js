@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import classes from './Comments.module.css';
+import classes from './Comments.scss';
 import NewCommentForm from './NewCommentForm';
 
 const Comments = () => {
@@ -11,7 +11,7 @@ const Comments = () => {
   };
   
   return (
-    <section className={classes.comments}>
+    <section className="comments">
       <h2>User Comments</h2>
       {!isAddingComment && (
         <button className='btn' onClick={startAddCommentHandler}>

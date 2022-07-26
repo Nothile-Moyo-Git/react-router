@@ -1,8 +1,8 @@
-import classes from './CommentItem.module.css';
+import 'CommentItem.scss';
 
 const CommentItem = (props) => {
   return (
-    <li className={classes.item}>
+    <li className="item">
       <p>{props.text}</p>
     </li>
   );

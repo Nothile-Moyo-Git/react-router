@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
   
-body {
+body{
     font-family: sans-serif;
     margin: 0;
     background-color: #1e202a;
@@ -18,13 +18,13 @@ body {
     align-items: center;
 }
   
-.focused {
+.focused{
     font-size: 3rem;
     font-weight: bold;
     color: white;
 }
   
-.btn {
+.btn{
     text-decoration: none;
     background-color: teal;
     color: white;
