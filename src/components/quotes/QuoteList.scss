@@ -4,12 +4,15 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    animation: fade-in 150ms linear;
 }
   
 .sorting {
-    padding-bottom: 1rem;
+    animation: fade-in 150ms linear;
+    padding-bottom: 2rem;
     border-bottom: 3px solid #b2d4d4;
     margin-bottom: 2rem;
+    text-align: left;
 
     button {
         font: inherit;

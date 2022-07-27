@@ -2,10 +2,17 @@ import { Fragment } from 'react';
 
 import QuoteItem from './QuoteItem';
 import './QuoteList.scss';
+import '../layout/Layout.scss';
 
 const QuoteList = (props) => {
+
+
+
   return (
-    <Fragment>
+    <section className="main">
+      <div className="sorting">
+        <button onClick={props.reverseQuotes}>Sort Ascending</button>
+      </div>
       <ul className="list">
         {props.quotes.map((quote) => (
           <QuoteItem
@@ -16,7 +23,7 @@ const QuoteList = (props) => {
           />
         ))}
       </ul>
-    </Fragment>
+    </section>
   );
 };
 
