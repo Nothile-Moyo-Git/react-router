@@ -1,17 +1,13 @@
-import { Fragment } from 'react';
-
 import QuoteItem from './QuoteItem';
 import './QuoteList.scss';
 import '../layout/Layout.scss';
 
 const QuoteList = (props) => {
 
-
-
   return (
     <section className="main">
       <div className="sorting">
-        <button onClick={props.reverseQuotes}>Sort Ascending</button>
+        <button onClick={props.reverseQuotes}>Sort { props.quotesAscending === true ? 'Ascending' : 'Descending' }</button>
       </div>
       <ul className="list">
         {props.quotes.map((quote) => (
