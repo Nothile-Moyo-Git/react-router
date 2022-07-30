@@ -1,10 +1,12 @@
 import './App.scss';
 import MainNavigation from './components/layout/MainNavigation';
 import QuoteList from './components/quotes/QuoteList';
-import { Switch, Route, Redirect, useParams } from 'react-router-dom';
+import HighlightedQuote from './components/quotes/HighlightedQuote';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { DUMMY_QUOTES } from './data/dummy_quotes';
 
 import { useState } from 'react';
+import NoQuotesFound from './components/quotes/NoQuotesFound';
 
 function App() {
 
@@ -13,6 +15,7 @@ function App() {
 
   // Set our states for our quotes and ascending values which we will update between re-renders
   const [quotes, setQuotes] = useState(JSON.parse(sessionStorage.getItem('quotes')));
+  const [currentQuote, setCurrentQuote] = useState({text: '', author: ''});
   const [quotesAscending, setQuotesAscending] = useState(true);
 
   // Reverse the order of our quotes and our ascending boolean
@@ -24,15 +27,8 @@ function App() {
     setQuotesAscending(( prevOrder ) => { return !prevOrder; });
   };
 
-  let params = useParams();
-  console.log(params);
-
-  const getQuoteTextFromID = () => {
-
-  };
-
-  const getQuoteAuthorFromID = () => {
-
+  const setQuote = (quote) => {
+    setCurrentQuote(quote);
   };
 
   return (
@@ -40,8 +36,15 @@ function App() {
       <MainNavigation/>
       <Switch>
 
+        <Route path="/quotes/:quoteID">
+          <HighlightedQuote text={currentQuote.text} author={currentQuote.author}/>
+        </Route>
+
         <Route exact path="/quotes">
-          <QuoteList quotes={quotes} reverseQuotes={onReverseOrder} quotesAscending={quotesAscending}/>
+          { quotes.length > 0 ? 
+            <QuoteList quotes={quotes} reverseQuotes={onReverseOrder} quotesAscending={quotesAscending} setQuote={setQuote}/> :
+            <NoQuotesFound/>
+          }
         </Route>
 
         <Route exact path="/">

@@ -1,4 +1,5 @@
 import './QuoteItem.scss';
+import { Link } from 'react-router-dom';
 
 const QuoteItem = (props) => {
   return (
@@ -9,9 +10,9 @@ const QuoteItem = (props) => {
         </blockquote>
         <figcaption>{props.author}</figcaption>
       </figure>
-      <a className='btn'>
+      <Link to={`/quotes/${props.id}`} className="btn" onClick={() => {props.getQuote(props.id)}}>
         View Fullscreen
-      </a>
+      </Link>
     </li>
   );
 };
