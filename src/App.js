@@ -2,6 +2,7 @@ import './App.scss';
 import MainNavigation from './components/layout/MainNavigation';
 import QuoteList from './components/quotes/QuoteList';
 import HighlightedQuote from './components/quotes/HighlightedQuote';
+import Comments from './components/comments/Comments';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { DUMMY_QUOTES } from './data/dummy_quotes';
 
@@ -38,6 +39,7 @@ function App() {
 
         <Route path="/quotes/:quoteID">
           <HighlightedQuote text={currentQuote.text} author={currentQuote.author}/>
+          <Comments />
         </Route>
 
         <Route exact path="/quotes">
@@ -48,6 +50,10 @@ function App() {
         </Route>
 
         <Route exact path="/">
+          <Redirect to="/quotes"/>
+        </Route>
+
+        <Route exact path="/react-router">
           <Redirect to="/quotes"/>
         </Route>
       </Switch>

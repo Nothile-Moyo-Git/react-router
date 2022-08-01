@@ -2,6 +2,10 @@
 
 .comments{
     text-align: center;
+    animation: fade-in 125ms linear;
+    color: white;
+    width: calc(100% - 1rem);
+    max-width: 40rem;
 
     & > button{
         font-size: 1.25rem;

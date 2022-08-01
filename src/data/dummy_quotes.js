@@ -1,12 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 export const DUMMY_QUOTES = [{
-        id: uuidv4(),
+        id: "0b4a007a-9dbd-4ded-a002-e1ce49664d3a",
         author: 'Test',
         text: 'This is a test!'
     },
     {
-        id: uuidv4(),
+        id: "a23f391f-cbd4-4162-9747-72f0085dc78a",
         author: 'Nothile',
         text: 'This is another test'
     }

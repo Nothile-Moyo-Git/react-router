@@ -1,4 +1,4 @@
-import 'CommentItem.scss';
+import './CommentItem.scss';
 
 const CommentItem = (props) => {
   return (

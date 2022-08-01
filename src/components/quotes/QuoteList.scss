@@ -23,6 +23,7 @@
         padding: 0.5rem 1.5rem;
         cursor: pointer;
         transition: $standard_transition;
+        box-shadow: $button_shadow;
 
         &:hover{
             background-color: #c2fafa;

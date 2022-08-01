@@ -1,7 +1,10 @@
 import { useState } from 'react';
 
-import classes from './Comments.scss';
+import './Comments.scss';
 import NewCommentForm from './NewCommentForm';
+
+import { DUMMY_COMMENTS } from '../../data/dummy_comments';
+import CommentsList from './CommentsList';
 
 const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
@@ -20,6 +23,7 @@ const Comments = () => {
       )}
       {isAddingComment && <NewCommentForm />}
       <p>Comments...</p>
+      <CommentsList comments={DUMMY_COMMENTS}/>
     </section>
   );
 };
