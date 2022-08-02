@@ -13,8 +13,8 @@ const NewCommentForm = (props) => {
   };
 
   return (
-    <form className="form" onSubmit={submitFormHandler}>
-      <div className="form" onSubmit={submitFormHandler}>
+    <form className="form form--layout" onSubmit={submitFormHandler}>
+      <div className="form form--layout" onSubmit={submitFormHandler}>
         <label htmlFor='comment'>Your Comment</label>
         <textarea id='comment' rows='5' ref={commentTextRef}></textarea>
       </div>

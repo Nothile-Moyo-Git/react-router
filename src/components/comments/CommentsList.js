@@ -3,7 +3,7 @@ import './CommentsList.scss';
 
 const CommentsList = (props) => {
   return (
-    <ul className="comments">
+    <ul className="comments comments--list">
       {props.comments.map((comment) => (
         <CommentItem key={comment.id} text={comment.text} />
       ))}

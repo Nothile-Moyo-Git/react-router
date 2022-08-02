@@ -39,7 +39,7 @@ function App() {
 
         <Route path="/quotes/:quoteID">
           <HighlightedQuote text={currentQuote.text} author={currentQuote.author}/>
-          <Comments />
+          <Comments quoteId={ currentQuote.id }/>
         </Route>
 
         <Route exact path="/quotes">

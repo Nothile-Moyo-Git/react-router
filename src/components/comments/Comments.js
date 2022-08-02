@@ -6,12 +6,20 @@ import NewCommentForm from './NewCommentForm';
 import { DUMMY_COMMENTS } from '../../data/dummy_comments';
 import CommentsList from './CommentsList';
 
-const Comments = () => {
+const Comments = (props) => {
   const [isAddingComment, setIsAddingComment] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+
+  const showCommentHandler = (event) => {
+    event.preventDefault();
+    setShowComments((previousState) => { return !previousState; })
+  }
 
   const startAddCommentHandler = () => {
     setIsAddingComment(true);
   };
+
+  const comments = DUMMY_COMMENTS.filter(index => index.quoteId === props.quoteId);
   
   return (
     <section className="comments">
@@ -22,8 +30,8 @@ const Comments = () => {
         </button>
       )}
       {isAddingComment && <NewCommentForm />}
-      <p>Comments...</p>
-      <CommentsList comments={DUMMY_COMMENTS}/>
+      <button className="btn btn--flat" onClick={showCommentHandler}>Load comments</button>
+      {showComments && <CommentsList comments={comments}/>}
     </section>
   );
 };

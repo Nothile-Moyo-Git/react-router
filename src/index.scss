@@ -44,14 +44,16 @@ body{
         font: inherit;
         color: teal;
         border: none;
-        background-color: none;
+        background: none;
         text-decoration: none;
         padding: 0.75rem 1.5rem;
         border-radius: 4px;
+        box-shadow: none;
+        transition: $standard_transition;
 
-        &:hover, &:active{
-            background-color: teal;
-            color: white;
+        @include state(){
+            background-color: transparent;
+            color: #11acac;
         }
     }
 }

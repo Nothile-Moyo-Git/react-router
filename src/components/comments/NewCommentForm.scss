@@ -4,6 +4,12 @@
     margin-top: 1rem;
     position: relative;
     text-align: center;
+
+    &--layout{
+        display: flex;
+        flex-direction: column;
+        grid-row-gap: 1rem;
+    }
 }
   
 .loading{
