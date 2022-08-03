@@ -1,15 +1,23 @@
 import { useRef } from 'react';
 import './NewCommentForm.scss';
+import { v4 as uuidv4 } from 'uuid';
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-
     // optional: Could validate here
 
     // send comment to server
+    const newComment = {
+      id: uuidv4(),
+      text: event.target[0].value,
+      quoteId: props.quoteId
+    };
+
+    props.setComments(previousComments => [...previousComments, newComment]);
+    props.setIsAdding(false);
   };
 
   return (
