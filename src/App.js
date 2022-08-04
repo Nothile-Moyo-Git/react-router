@@ -13,7 +13,7 @@ function App() {
 
   // Get our initial sessionStorage from dummy_quotes if we don't have one set
   sessionStorage.getItem('quotes') === null && sessionStorage.setItem('quotes', JSON.stringify(DUMMY_QUOTES));
-
+  
   // Set our states for our quotes and ascending values which we will update between re-renders
   const [quotes, setQuotes] = useState(JSON.parse(sessionStorage.getItem('quotes')));
   const [currentQuote, setCurrentQuote] = useState({text: '', author: ''});
@@ -32,6 +32,10 @@ function App() {
     setCurrentQuote(quote);
   };
 
+  const addComment = (comment) => {
+
+  };
+
   return (
     <div className="App">
       <MainNavigation/>
@@ -39,7 +43,7 @@ function App() {
 
         <Route path="/quotes/:quoteID">
           <HighlightedQuote text={currentQuote.text} author={currentQuote.author}/>
-          <Comments quoteId={ currentQuote.id }/>
+          <Comments quoteId={ currentQuote.id } comments={currentQuote.comments} addComment={addComment}/>
         </Route>
 
         <Route exact path="/quotes">

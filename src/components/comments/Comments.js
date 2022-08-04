@@ -2,27 +2,26 @@ import { useState } from 'react';
 
 import './Comments.scss';
 import NewCommentForm from './NewCommentForm';
-
-import { DUMMY_COMMENTS } from '../../data/dummy_comments';
 import CommentsList from './CommentsList';
 
 const Comments = (props) => {
 
-  //session storage data for comments
-  sessionStorage.getItem('comments') === null && sessionStorage.setItem('comments', JSON.stringify(DUMMY_COMMENTS.filter(index => index.quoteId === props.quoteId))); 
-
   const [isAddingComment, setIsAddingComment] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState(DUMMY_COMMENTS.filter(index => index.quoteId === props.quoteId));
+  const [comments, setComments] = useState(props.comments);
 
   const showCommentHandler = (event) => {
     event.preventDefault();
-    setShowComments((previousState) => { return !previousState; })
+    setShowComments((previousState) => { return !previousState; });
   }
 
   const startAddCommentHandler = () => {
     setIsAddingComment(true);
   };
+
+  const addCommentHandler = (comment) => {
+    props.addComment(comment);
+  }
   
   return (
     <section className="comments">
@@ -38,7 +37,7 @@ const Comments = (props) => {
                 Add a Comment
               </button>
             )}
-            {isAddingComment && <NewCommentForm setIsAdding={setIsAddingComment} setComments={setComments} quoteId={props.quoteId}/>}
+            {isAddingComment && <NewCommentForm setIsAdding={setIsAddingComment} setComments={setComments} quoteId={props.quoteId} addComment={addCommentHandler}/>}
             {comments.length > 0 ? <CommentsList comments={comments}/> : <b>No comments were added yet!</b>}
           </div>
         )

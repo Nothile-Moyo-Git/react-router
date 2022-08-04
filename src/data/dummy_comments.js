@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { DUMMY_QUOTES } from './dummy_quotes';
 
 export const DUMMY_COMMENTS = [
