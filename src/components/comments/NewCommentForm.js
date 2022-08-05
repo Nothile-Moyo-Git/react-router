@@ -13,6 +13,7 @@ const NewCommentForm = (props) => {
     const newComment = {
       id: uuidv4(),
       text: event.target[0].value,
+      quoteId: props.quoteId
     };
 
     props.setComments(previousComments => [...previousComments, newComment]);

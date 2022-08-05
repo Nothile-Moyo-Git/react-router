@@ -33,7 +33,16 @@ function App() {
   };
 
   const addComment = (comment) => {
+    const updatedComments = quotes.filter((quote) => { 
+      if(quote.id === comment.quoteId){
+        const quoteComments = quote.comments;
+        console.log(quoteComments);
+        quoteComments.push(comment);
+        return quoteComments;
+      }
+     });
 
+    console.log(updatedComments);
   };
 
   return (
