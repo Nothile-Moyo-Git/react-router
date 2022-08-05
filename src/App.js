@@ -19,6 +19,8 @@ function App() {
   const [currentQuote, setCurrentQuote] = useState({text: '', author: ''});
   const [quotesAscending, setQuotesAscending] = useState(true);
 
+  const quotesCopy = quotes;
+
   // Reverse the order of our quotes and our ascending boolean
   const onReverseOrder = (event) => {
 
@@ -32,17 +34,10 @@ function App() {
     setCurrentQuote(quote);
   };
 
-  const addComment = (comment) => {
-    const updatedComments = quotes.filter((quote) => { 
-      if(quote.id === comment.quoteId){
-        const quoteComments = quote.comments;
-        console.log(quoteComments);
-        quoteComments.push(comment);
-        return quoteComments;
-      }
-     });
-
-    console.log(updatedComments);
+  const updateComments = (comments) => {
+    console.log(comments);
+    console.log(quotesCopy);
+    
   };
 
   return (
@@ -52,7 +47,7 @@ function App() {
 
         <Route path="/quotes/:quoteID">
           <HighlightedQuote text={currentQuote.text} author={currentQuote.author}/>
-          <Comments quoteId={ currentQuote.id } comments={currentQuote.comments} addComment={addComment}/>
+          <Comments quoteId={ currentQuote.id } comments={currentQuote.comments} updateComments={updateComments}/>
         </Route>
 
         <Route exact path="/quotes">
