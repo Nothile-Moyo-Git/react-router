@@ -19,7 +19,7 @@ const Comments = (props) => {
     setIsAddingComment(true);
   };
 
-
+ 
   useEffect(() => {
     props.updateComments(comments);
   },[comments,props]);
