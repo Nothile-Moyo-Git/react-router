@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './Comments.scss';
 import NewCommentForm from './NewCommentForm';
@@ -19,9 +19,10 @@ const Comments = (props) => {
     setIsAddingComment(true);
   };
 
-  const addCommentHandler = (comment) => {
-    props.addComment(comment);
-  }
+
+  useEffect(() => {
+    props.updateComments(comments);
+  },[comments,props]);
   
   return (
     <section className="comments">
@@ -37,7 +38,7 @@ const Comments = (props) => {
                 Add a Comment
               </button>
             )}
-            {isAddingComment && <NewCommentForm setIsAdding={setIsAddingComment} setComments={setComments} quoteId={props.quoteId} addComment={addCommentHandler}/>}
+            {isAddingComment && <NewCommentForm setIsAdding={setIsAddingComment} setComments={setComments} quoteId={props.quoteId}/>}
             {comments.length > 0 ? <CommentsList comments={comments}/> : <b>No comments were added yet!</b>}
           </div>
         )

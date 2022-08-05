@@ -17,7 +17,6 @@ const NewCommentForm = (props) => {
     };
 
     props.setComments(previousComments => [...previousComments, newComment]);
-    props.addComment(newComment);
     props.setIsAdding(false);
   };
 
