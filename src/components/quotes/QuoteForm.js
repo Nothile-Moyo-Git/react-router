@@ -1,7 +1,7 @@
 import { useRef } from 'react';
-
-import Card from '../ui/Card';
-import LoadingSpinner from '../ui/LoadingSpinner';
+import { v4 as uuidv4 } from 'uuid';
+import Card from '../UI/Card';
+import LoadingSpinner from '../UI/LoadingSpinner';
 import './QuoteForm.scss';
 
 const QuoteForm = (props) => {
@@ -16,12 +16,12 @@ const QuoteForm = (props) => {
 
     // optional: Could validate here
 
-    props.onAddQuote({ author: enteredAuthor, text: enteredText });
+    props.onAddQuote({ author: enteredAuthor, text: enteredText, id:uuidv4(), comments: []});
   }
 
   return (
-    <Card>
-      <form className="form" onSubmit={submitFormHandler}>
+    <Card className="card card--container card--gap-top">
+      <form className="quote-form" onSubmit={submitFormHandler}>
         {props.isLoading && (
           <div className="loading">
             <LoadingSpinner />

@@ -8,6 +8,7 @@ import { DUMMY_QUOTES } from './data/dummy_quotes';
 
 import { useState } from 'react';
 import NoQuotesFound from './components/quotes/NoQuotesFound';
+import QuoteForm from './components/quotes/QuoteForm';
 
 function App() {
 
@@ -30,14 +31,34 @@ function App() {
     setQuotesAscending(( prevOrder ) => { return !prevOrder; });
   };
 
+  // Set our current quote for viewing the page and updating comments on the page
   const setQuote = (quote) => {
     setCurrentQuote(quote);
   };
 
-  const updateComments = (comments) => {
-    console.log(comments);
-    console.log(quotesCopy);
+  // Update comment handler, it takes the comments array passed through from the comments component
+  // Then it maps the quote object, deconstructs it, and adds the new comments when the quoteId makes the quote's id
+  const updateComments = (comments, quoteId) => {
     
+    const newQuotes = quotesCopy.map((quote) => {
+      if(quote.id === quoteId){
+        return {
+          id: quoteId,
+          text: quote.text,
+          author: quote.author,
+          comments: comments
+        };
+      }else{
+        return quote;
+      }
+    });
+
+    setQuotes(newQuotes);
+  };
+
+  // Add our quote by using a spread operator of the previous quotes and adding the new entry
+  const addQuoteHandler = (newQuote) => {
+    console.log(newQuote);
   };
 
   return (
@@ -55,6 +76,10 @@ function App() {
             <QuoteList quotes={quotes} reverseQuotes={onReverseOrder} quotesAscending={quotesAscending} setQuote={setQuote}/> :
             <NoQuotesFound/>
           }
+        </Route>
+
+        <Route exact path="/add-quote">
+          <QuoteForm/>
         </Route>
 
         <Route exact path="/">
