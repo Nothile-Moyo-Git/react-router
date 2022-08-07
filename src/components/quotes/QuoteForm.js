@@ -3,10 +3,13 @@ import { v4 as uuidv4 } from 'uuid';
 import Card from '../UI/Card';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import './QuoteForm.scss';
+import { useHistory } from 'react-router-dom';
 
 const QuoteForm = (props) => {
   const authorInputRef = useRef();
   const textInputRef = useRef();
+  // Redirect after form submit
+  const history = useHistory();
 
   function submitFormHandler(event) {
     event.preventDefault();
@@ -17,6 +20,7 @@ const QuoteForm = (props) => {
     // optional: Could validate here
 
     props.onAddQuote({ author: enteredAuthor, text: enteredText, id:uuidv4(), comments: []});
+    history.push('/react-router/quotes');
   }
 
   return (

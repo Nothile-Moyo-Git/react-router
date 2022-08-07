@@ -58,7 +58,7 @@ function App() {
 
   // Add our quote by using a spread operator of the previous quotes and adding the new entry
   const addQuoteHandler = (newQuote) => {
-    console.log(newQuote);
+    setQuotes((previousQuotes) => { return [...previousQuotes, newQuote]; } );
   };
 
   return (
@@ -66,28 +66,28 @@ function App() {
       <MainNavigation/>
       <Switch>
 
-        <Route path="/quotes/:quoteID">
-          <HighlightedQuote text={currentQuote.text} author={currentQuote.author}/>
-          <Comments quoteId={ currentQuote.id } comments={currentQuote.comments} updateComments={updateComments}/>
+        <Route path="/react-router/quotes/:quoteID">
+          <HighlightedQuote text={ currentQuote.text } author={ currentQuote.author }/>
+          <Comments quoteId={ currentQuote.id } comments={ currentQuote.comments } updateComments={updateComments}/>
         </Route>
 
-        <Route exact path="/quotes">
+        <Route exact path="/react-router/quotes">
           { quotes.length > 0 ? 
             <QuoteList quotes={quotes} reverseQuotes={onReverseOrder} quotesAscending={quotesAscending} setQuote={setQuote}/> :
             <NoQuotesFound/>
           }
         </Route>
 
-        <Route exact path="/add-quote">
-          <QuoteForm/>
+        <Route exact path="/react-router/add-quote">
+          <QuoteForm onAddQuote={addQuoteHandler}/>
         </Route>
 
         <Route exact path="/">
-          <Redirect to="/quotes"/>
+          <Redirect to="/react-router/quotes"/>
         </Route>
 
         <Route exact path="/react-router">
-          <Redirect to="/quotes"/>
+          <Redirect to="/react-router/quotes"/>
         </Route>
       </Switch>
     </div>

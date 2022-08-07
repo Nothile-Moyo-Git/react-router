@@ -10,7 +10,7 @@ const QuoteItem = (props) => {
         </blockquote>
         <figcaption>{props.author}</figcaption>
       </figure>
-      <Link to={`/quotes/${props.id}`} className="btn" onClick={() => {props.getQuote(props.id)}}>
+      <Link to={`/react-router/quotes/${props.id}`} className="btn" onClick={() => {props.getQuote(props.id)}}>
         View Fullscreen
       </Link>
     </li>
