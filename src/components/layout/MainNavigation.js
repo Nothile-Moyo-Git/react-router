@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom';
 const MainNavigation = (props) => {
     return (
         <header className="header">
-            <NavLink className="logo" exact={true} to="/react-router/">Router App</NavLink>
+            <NavLink className="logo" exact={true} to="/">Router App</NavLink>
             <div className="nav">
                 <ul>
                     <li>
-                        <NavLink activeClassName="active" exact={true} to="/react-router/quotes">All Quotes</NavLink>
+                        <NavLink activeClassName="active" exact={true} to="/quotes">All Quotes</NavLink>
                     </li>
                     <li>
-                    <NavLink activeClassName="active" exact={true} to="/react-router/add-quote">Add Quote</NavLink>
+                        <NavLink activeClassName="active" exact={true} to="/add-quote">Add Quote</NavLink>
                     </li>
                 </ul>
             </div>

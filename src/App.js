@@ -66,28 +66,32 @@ function App() {
       <MainNavigation/>
       <Switch>
 
-        <Route path="/react-router/quotes/:quoteID">
+        <Route path="/quotes/:quoteID">
           <HighlightedQuote text={ currentQuote.text } author={ currentQuote.author }/>
           <Comments quoteId={ currentQuote.id } comments={ currentQuote.comments } updateComments={updateComments}/>
         </Route>
 
-        <Route exact path="/react-router/quotes">
+        <Route exact path="/quotes">
           { quotes.length > 0 ? 
             <QuoteList quotes={quotes} reverseQuotes={onReverseOrder} quotesAscending={quotesAscending} setQuote={setQuote}/> :
             <NoQuotesFound/>
           }
         </Route>
 
-        <Route exact path="/react-router/add-quote">
+        <Route exact path="/add-quote">
           <QuoteForm onAddQuote={addQuoteHandler}/>
         </Route>
 
         <Route exact path="/">
-          <Redirect to="/react-router/quotes"/>
+          <Redirect to="/quotes"/>
         </Route>
 
         <Route exact path="/react-router">
-          <Redirect to="/react-router/quotes"/>
+          <Redirect to="/quotes"/>
+        </Route>
+
+        <Route path="*">
+          <Redirect to="/quotes"/>
         </Route>
       </Switch>
     </div>
