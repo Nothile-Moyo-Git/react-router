@@ -4,4 +4,4 @@ import './index.scss';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Router> <App/> </Router>);
+root.render(<Router basename="/react-router"> <App/> </Router>);
