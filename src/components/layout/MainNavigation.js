@@ -4,17 +4,17 @@ import { NavLink } from 'react-router-dom';
 const MainNavigation = (props) => {
     return (
         <header className="header">
-            <NavLink className="logo" exact={true} to="/">Router App</NavLink>
-            <div className="nav">
+            <NavLink to="/quotes" activeClassName="active" className="logo">Router App</NavLink>
+            <nav className="nav">
                 <ul>
                     <li>
-                        <NavLink activeClassName="active" exact={true} to="/quotes">All Quotes</NavLink>
+                        <NavLink to="/quotes" activeClassName="active">All Quotes</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName="active" exact={true} to="/add-quote">Add Quote</NavLink>
+                        <NavLink to="/new-quote" activeClassName="active">New Quote</NavLink>
                     </li>
                 </ul>
-            </div>
+            </nav>
         </header>
     );
 }

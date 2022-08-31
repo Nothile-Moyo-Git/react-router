@@ -1,54 +1,88 @@
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import './Comments.scss';
 import NewCommentForm from './NewCommentForm';
-import CommentsList from './CommentsList';
+import useHttp from '../../hooks/use-http';
+import { getAllComments } from '../../lib/api';
+import LoadingSpinner from '../UI/LoadingSpinner';
+import CommentsList from '../comments/CommentsList';
+import { deleteComment } from '../../lib/api';
 
 const Comments = (props) => {
 
+  const params = useParams();
+
+  const { quoteId } = params;
+
+  const { sendRequest, data: loadedComments, status } = useHttp(getAllComments, true);
+  const { sendRequest: deleteRequest, data: updatedComments, status: deleteStatus } = useHttp(deleteComment);
+
   // comment states
   const [isAddingComment, setIsAddingComment] = useState(false);
-  const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState(props.comments);
-
-  // Show comment onclick button
-  const showCommentHandler = (event) => {
-    event.preventDefault();
-    setShowComments((previousState) => { return !previousState; });
-  }
+  const [useOldComments, setUseOldComments] = useState(false);
 
   // Start the add comment process by allowing the form to render
   const startAddCommentHandler = () => {
     setIsAddingComment(true);
   };
 
- 
+  // Added comment function which retrives the data
+  const addedCommentHandler = useCallback((commentId) => {    
+    sendRequest(quoteId);
+    setIsAddingComment(false);
+    setUseOldComments(false);
+  },[sendRequest, quoteId]);
+
+  const updateCommentHandler = (commentId, quoteId) => {
+    setUseOldComments(true);
+    deleteRequest({commentId, quoteId});
+  };
+
   useEffect(() => {
-    // Update the comments in the quote if we have comments and they have been updated
-    typeof(comments) !== 'undefined' && props.updateComments(comments, props.quoteId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[comments]);
-  
+    sendRequest( quoteId );
+  },[sendRequest, quoteId]);
+
+  let comments;
+
+  if (status === 'pending'){
+    comments = (
+      <div className="centered">
+        <LoadingSpinner/>
+      </div>
+    );
+  }
+
+  if (status === 'completed' && (loadedComments && loadedComments.length > 0)) {
+    comments = <CommentsList quoteId={quoteId} comments={loadedComments} updateComments={updateCommentHandler}/>;
+  }
+
+  if (status === 'completed' && (loadedComments && loadedComments.length === 0)) {
+    comments = <p className='centered'>No comments were added yet!</p>;
+  }
+
+  if (deleteStatus === 'completed' && useOldComments === true && updatedComments.length > 0){
+    comments = <CommentsList quoteId={quoteId} comments={updatedComments} updateComments={updateCommentHandler}/>
+  }
+
+  if (deleteStatus === 'completed' && useOldComments === true && updatedComments.length === 0){
+    comments = <p className='centered'>No comments were added yet!</p>;
+  }
+
   return (
     <section className="comments">
-
-      <button className="btn btn--flat" onClick={showCommentHandler}>Load comments</button>
-  
-      { props.quoteId && (
-          showComments && (
-            <div>
-              <h2>User Comments</h2>
-              {!isAddingComment && (
-                <button className='btn' onClick={startAddCommentHandler}>
-                  Add a Comment
-                </button>
-              )}
-              {isAddingComment && <NewCommentForm setIsAdding={setIsAddingComment} setComments={setComments} quoteId={props.quoteId}/>}
-              {typeof(comments) !== 'undefined' ? <CommentsList comments={comments}/> : <b>No comments were added yet!</b>}
-            </div>
-          )
-        )
+      <h2>User Comments</h2>
+      {!isAddingComment && (
+        <button className='btn' onClick={startAddCommentHandler}>
+          Add a Comment
+        </button>
+      )}
+      {isAddingComment && 
+        <NewCommentForm 
+          quoteId={params.quoteId} 
+          onAddedComment={addedCommentHandler}
+        />
       }
+      { comments }
     </section>
   );
 };

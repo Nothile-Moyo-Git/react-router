@@ -1,6 +1,6 @@
 @import '../../styles/Shared.scss';
 
-.noquotes {
+.no-quotes {
     height: 20rem;
     margin: auto;
     display: flex;
@@ -11,8 +11,7 @@
     align-items: center;
 
     p{
-        color: #262c2c;
         font-size: 3rem;
-        font-weight: bold;
+        font-weight: semibold;
     }
 }

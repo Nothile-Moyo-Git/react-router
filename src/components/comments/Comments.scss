@@ -6,6 +6,8 @@
     color: white;
     width: calc(100% - 1rem);
     max-width: 40rem;
+    margin: auto;
+    padding-top: 1rem;
 
     & > button{
         font-size: 1.25rem;

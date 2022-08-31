@@ -1,27 +1,36 @@
 import { useRef } from 'react';
 import './NewCommentForm.scss';
-import { v4 as uuidv4 } from 'uuid';
+import useHttp from '../../hooks/use-http';
+import { addComment } from '../../lib/api';
+import { useState, useEffect } from 'react';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
+
+  const { sendRequest, data, error, status } = useHttp(addComment, true);
+  const [ isSending, setIsSending ] = useState(false);
+
+  useEffect(() => {
+
+    if (status === 'completed' && !error){
+      props.onAddedComment(data);
+      setIsSending(false);
+    }
+ 
+  },[status, data, error, props]);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
     // optional: Could validate here
 
-    // send comment to server
-    const newComment = {
-      id: uuidv4(),
-      text: event.target[0].value,
-      quoteId: props.quoteId
-    };
-
-    props.setComments(previousComments => [...previousComments, newComment]);
-    props.setIsAdding(false);
+    setIsSending(true);
+    sendRequest({commentData: {text: commentTextRef.current.value}, quoteId: props.quoteId});
   };
 
   return (
     <form className="form form--layout" onSubmit={submitFormHandler}>
+      { (status === 'pending' && isSending) && <div className="centered"><LoadingSpinner/></div> }
       <div className="form form--layout" onSubmit={submitFormHandler}>
         <label htmlFor='comment'>Your Comment</label>
         <textarea id='comment' rows='5' ref={commentTextRef}></textarea>

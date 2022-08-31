@@ -2,6 +2,7 @@
 
 .quote-form {
     position: relative;
+    color: #212929;
 
     .loading {
         position: absolute;
@@ -17,7 +18,7 @@
         margin-bottom: 0.5rem;
     
         label {
-            font-weight: bold;
+            font-weight: semibold;
             display: block;
             margin-bottom: 0.5rem;
         }

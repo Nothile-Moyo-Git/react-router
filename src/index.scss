@@ -26,17 +26,19 @@ body{
   
 .btn{
     text-decoration: none;
-    background-color: teal;
-    color: white;
+    color: #E6FCFC;
     border-radius: 4px;
-    padding: 0.75rem 1.5rem;
+    padding: 0.65rem 1rem;
     border: 1px solid transparent;
     cursor: pointer;
     transition: $standard_transition;
-    box-shadow: $button_shadow;
+    background: $green_gradient;
+    background-size: $gradient-bg-standard;
+    box-shadow: $box-shadow;
+    animation: gradient 5s linear infinite;
 
     @include state(){
-        background-color: #11acac;
+        transform: scale(1.05);
     }
 
     &--flat{

@@ -7,14 +7,27 @@
     padding: 0 1rem;
     justify-content: space-between;
     align-items: center;
-    background-color: #008080;
+    background: $green_gradient;
+    background-size: $gradient-bg-standard;
     box-shadow: $box-shadow;
+    animation: gradient 5s linear infinite;
+
+    a{
+        text-decoration: none;
+        color: #E6FCFC;
+        transition: $standard_transition;
+    }
 }
   
 .logo{
     font-size: 2rem;
-    color: white;
+    color: #88dfdf;
     text-decoration: none;
+    transition: $standard_transition;
+
+    @include state(){
+        color: #E6FCFC;
+    }
 }
   
 .nav{
@@ -28,16 +41,6 @@
     li{
         margin-left: 1.5rem;
         font-size: 1.25rem;
-    }
-
-    a{
-        text-decoration: none;
-        color: #88dfdf;
-        transition: $standard_transition;
-
-        @include state(){
-            color: #E6FCFC;
-        }
     }
 }
   

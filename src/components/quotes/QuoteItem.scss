@@ -8,11 +8,36 @@
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
-    background-color: #c2e7f0;
+    background: $brand_color_fourteen;
+    position: relative;
+
+    &__delete{
+        width: 2rem;
+        height: 2rem;
+        position:absolute;
+        background: $green_gradient;
+        background-size: $gradient-bg-standard;
+        box-shadow: $box-shadow;
+        animation: gradient 5s linear infinite;
+        border-radius: 50%;
+        top: -1rem;
+        right: -1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        border: 0;
+        color: #E6FCFC;
+        padding-bottom: 0.35rem;
+        transition: $standard_transition;
+
+        @include state(){
+            transform: scale(1.05);
+        }
+    }
 
     figure{
         margin: 0;
         padding: 0;
+        padding-right: 1rem;
         width: 70%;
     }
 
@@ -26,6 +51,9 @@
     p{
         margin: 0;
         margin-bottom: 0.25rem;
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: #162b2b;
     }
 
     figcaption{

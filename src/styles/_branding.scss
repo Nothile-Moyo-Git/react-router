@@ -16,9 +16,27 @@ $brand_color_six: #A4508B;
 $brand_color_seven: #89D4CF;
 $brand_color_eight: #734AE8;
 
+// Standard teal colors
+$brand_color_nine: teal;
+$brand_color_ten: #00a693;
+$brand_color_eleven: #0a7e8c;
+$brand_color_twelve: #00827f;
+$brand_color_thirteen: #007474;
+$brand_color_fourteen: #c2e7f0;
+
 // backdrop
 $backdrop_color_one: rgb(30, 32, 42);
 
 // box shadow
 $box_shadow: ( 0px 0px 20px 0px rgba(0,0,0,0.4) );
 $button_shadow: ( 0px 0px 15px 0px rgba(0,0,0,0.2) );
+
+// Gaps
+$gap: 1rem;
+
+// gradients
+$green_gradient: linear-gradient(60deg, $brand_color_nine, $brand_color_ten, $brand_color_eleven, $brand_color_twelve, $brand_color_thirteen );
+$light_green_gradient: linear-gradient(60deg, $brand_color_fourteen, $brand_color_seven );
+
+// gradient background size
+$gradient-bg-standard: 400% 400%;

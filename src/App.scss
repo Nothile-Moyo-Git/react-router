@@ -4,4 +4,18 @@
   height: 100%;
   text-align: center;
   animation: fade-in 150ms linear;
+  font-family: 'Rubik', 'Calibri', sans-serif;
 }
+
+.gap-margin{
+  margin: $gap;
+}
+
+.gap-margin-y{
+  margin: $gap 0;
+}
+
+.gap-margin-x{
+  margin: 0 $gap;
+}
+
