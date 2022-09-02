@@ -35,7 +35,11 @@ const QuoteList = (props) => {
 
   const deleteQuoteHandler = (quoteId) => {
     props.updateQuotes(quoteId);
-  }
+  };
+
+  const editQuoteHandler = (quoteId, quoteText, author) => {
+    props.editQuote(quoteId, quoteText, author);
+  };
 
   return (
     <section className="main">
@@ -50,6 +54,9 @@ const QuoteList = (props) => {
             author={quote.author}
             text={quote.text}
             deleteQuote={deleteQuoteHandler}
+            editQuote={editQuoteHandler}
+            showForm={props.showForm}
+            setShowForm={props.setShowForm}
           />
         ))}
       </ul>

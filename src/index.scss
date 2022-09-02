@@ -28,7 +28,7 @@ body{
     text-decoration: none;
     color: #E6FCFC;
     border-radius: 4px;
-    padding: 0.65rem 1rem;
+    padding: 0.45rem 0.6rem;
     border: 1px solid transparent;
     cursor: pointer;
     transition: $standard_transition;
@@ -36,6 +36,11 @@ body{
     background-size: $gradient-bg-standard;
     box-shadow: $box-shadow;
     animation: gradient 5s linear infinite;
+    font-size: 1rem;
+
+    @include breakpoint-min(mobile){
+        padding: 0.45rem 1rem;
+    }
 
     @include state(){
         transform: scale(1.05);

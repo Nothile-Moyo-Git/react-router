@@ -6,17 +6,21 @@ import QuoteDetail from './components/pages/QuoteDetail';
 import NewQuote from './components/pages/NewQuote';
 import Layout from './components/layout/Layout';
 import NotFound from './components/pages/NotFound';
+import { useState } from 'react';
 
 function App() {
+
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <div className="App">      
-      <MainNavigation/>
+      <MainNavigation showForm={setShowForm}/>
 
       <Layout>
         <Switch>
           
           <Route exact path="/quotes">
-            <AllQuotes/>
+            <AllQuotes showForm={showForm} setShowForm={setShowForm}/>
           </Route>
 
           <Route path="/quotes/:quoteId">

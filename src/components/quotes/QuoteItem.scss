@@ -1,8 +1,8 @@
 @import '../../styles/Shared.scss';
 
 .item {
-    margin: 1rem 0;
-    padding: 1rem;
+    margin: 2rem 0;
+    padding: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,6 +10,27 @@
     border-radius: 6px;
     background: $brand_color_fourteen;
     position: relative;
+
+    @include breakpoint-min(tablet){
+        padding: 1rem;
+    }
+
+    &--form{
+        display: flex;
+        flex-direction: column;
+        grid-row-gap: 0.5rem;
+
+        textarea{
+            width: 100%;
+            border-radius: 6px;
+            border-color: teal;
+
+            &:focus{
+                background-color: #cbf8f8;
+                outline-color: teal;
+            }
+        }
+    }
 
     &__delete{
         width: 2rem;
@@ -34,11 +55,21 @@
         }
     }
 
+    &__buttons{
+        display: flex;
+        flex-direction: column;
+        grid-gap: 0.5rem;
+
+        &--horizontal{
+            flex-direction: row;
+        }
+    }
+
     figure{
         margin: 0;
         padding: 0;
-        padding-right: 1rem;
-        width: 70%;
+        padding-right: 0.5rem;
+        width: 50%;
     }
 
     blockquote{

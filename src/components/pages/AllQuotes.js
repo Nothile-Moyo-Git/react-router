@@ -17,6 +17,10 @@ const AllQuotes = (props) => {
         sendRequest({method: 'delete', quoteId: quoteId});
     }; 
 
+    const editQuoteHandler = (quoteId, quoteText, author) => {
+        sendRequest({method: 'update', quoteId: quoteId, quoteText: quoteText, author: author});
+    }
+
     if (status === 'pending') {
         return(
             <div className='centered'>
@@ -38,7 +42,7 @@ const AllQuotes = (props) => {
     }
 
     return(
-        <QuoteList quotes={quotes} updateQuotes={updateQuotesHandler}/>
+        <QuoteList quotes={quotes} updateQuotes={updateQuotesHandler} editQuote={editQuoteHandler} showForm={props.showForm} setShowForm={props.setShowForm}/>
     );
     
 };

@@ -1,27 +1,5 @@
 const FIREBASE_DOMAIN = 'https://react-router-f7386-default-rtdb.europe-west1.firebasedatabase.app/';
 
-export async function getAllQuotes() {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || 'Could not fetch quotes.');
-  }
-
-  const transformedQuotes = [];
-
-  for (const key in data) {
-    const quoteObj = {
-      id: key,
-      ...data[key],
-    };
-
-    transformedQuotes.push(quoteObj);
-  }
-
-  return transformedQuotes;
-}
-
 export async function getSingleQuote(quoteId) {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes/${quoteId}.json`);
   const data = await response.json();
@@ -129,8 +107,75 @@ export async function deleteComment({commentId, quoteId}) {
 
 }
 
-export async function quotesManager({method, quoteId}) {
+export async function commentsManager({method, quoteId, commentId}){
 
+  // Fetch our comments
+  if (method === 'fetch') {
+
+    const response = await fetch(`${FIREBASE_DOMAIN}/comments/${quoteId}.json`);
+
+    const data = await response.json();
+  
+    if (!response.ok) {
+      throw new Error(data.message || 'Could not get comments.');
+    }
+  
+    const transformedComments = [];
+  
+    for (const key in data) {
+      const commentObj = {
+        id: key,
+        ...data[key],
+      };
+      transformedComments.push(commentObj);
+    }
+  
+    return transformedComments;
+
+  } 
+
+  if (method === 'delete') {
+    
+    const response = await fetch(`${FIREBASE_DOMAIN}/comments/${quoteId}/${commentId}.json`,{
+      method: 'DELETE',
+      header: {
+        'Content-type': 'application/json'
+      }
+    });
+  
+    if(!response.ok){
+      console.log('Something went wrong');
+    }
+  
+    const update = await fetch(`${FIREBASE_DOMAIN}/comments/${quoteId}.json`);
+  
+    const data = await update.json();
+  
+    if (!response.ok) {
+      throw new Error(data.message || 'Could not get comments.');
+    }
+  
+    const transformedComments = [];
+  
+    for (const key in data) {
+      const commentObj = {
+        id: key,
+        ...data[key],
+      };
+      transformedComments.push(commentObj);
+    }
+  
+    return transformedComments;
+  
+  }
+
+  return [];
+
+}
+
+export async function quotesManager({method, quoteId, quoteText, author}) {
+
+  // Basic fetch, used when we first start the app
   if (method === 'fetch') {
 
     const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
@@ -154,10 +199,11 @@ export async function quotesManager({method, quoteId}) {
     return transformedQuotes;
   }
 
+  // Delete a quote, and then complete a fetch and return it
   if (method === 'delete') {
     
     // First we perform an API request to delete our quote based on the ID
-    const deleteQuotes = await fetch(`${FIREBASE_DOMAIN}/quotes/${quoteId}.json`,{
+    const deleteQuote = await fetch(`${FIREBASE_DOMAIN}/quotes/${quoteId}.json`,{
       method: 'DELETE',
       header: {
         'Content-type': 'application/json'
@@ -165,7 +211,7 @@ export async function quotesManager({method, quoteId}) {
     });  
 
     // If our quote deletion fails
-    if (!deleteQuotes.ok) {
+    if (!deleteQuote.ok) {
       throw new Error(`Entry ${quoteId} could not be deleted, there was an error`);
     }
 
@@ -206,6 +252,46 @@ export async function quotesManager({method, quoteId}) {
 
   }
 
-  throw new Error(`Error: Api call cannot be resolved. Please check any calls to 'quotesManager()'`);
+  // Update a quote, and then return the new array of quotes
+  if (method === 'update') {
+
+      // Update our quote
+      const updateQuote = await fetch(`${FIREBASE_DOMAIN}/quotes/${quoteId}.json`,{
+        method: 'PUT',
+        header: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify({text: quoteText, author: author})
+      });
+
+      if ( !updateQuote.ok ) {
+        throw new Error('Your PUT request failed. Please fix your update method in quotesManager()');
+      }
+
+      const quotes = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
+
+      const data = await quotes.json();
+
+      if ( !quotes.ok ) {
+        throw new Error('There was an error with your fetch request');
+      }
+
+      const transformedQuotes = [];
+  
+      for (const key in data) {
+        const quoteObj = {
+          id: key,
+          ...data[key],
+        };
+    
+        transformedQuotes.push(quoteObj);
+  
+      }
+  
+      return transformedQuotes;
+
+  }
+
+  return [];
 
 }
