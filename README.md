@@ -1,6 +1,10 @@
 # Nothile's Router App
 
-## Welcome, this is my multipage SPA using React, React Router, SCSS, Node.js & Github Pages.
+This app is currently deployed to Github pages.
+
+View App: https://nothile-moyo-git.github.io/react-router/quotes 
+
+### Welcome, this is my multipage SPA using React, React Router, SCSS, Node.js & Github Pages.
 
 ### Installation
 To install all necessary package dependencies, run "npm install" followed by "npm audit fix".
