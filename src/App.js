@@ -1,12 +1,15 @@
+import React, { useState, Suspense } from 'react';
 import './App.scss';
 import MainNavigation from './components/layout/MainNavigation';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import AllQuotes from './components/pages/AllQuotes';
-import QuoteDetail from './components/pages/QuoteDetail';
-import NewQuote from './components/pages/NewQuote';
+
 import Layout from './components/layout/Layout';
-import NotFound from './components/pages/NotFound';
-import { useState } from 'react';
+import LoadingSpinner from './components/UI/LoadingSpinner';
+
+const NewQuote = React.lazy(() => { return import('./components/pages/NewQuote'); });
+const QuoteDetail = React.lazy(() => { return import('./components/pages/QuoteDetail'); });
+const NotFound = React.lazy(() => { return import('./components/pages/NotFound'); });
+const AllQuotes = React.lazy(() => { return import('./components/pages/AllQuotes'); });
 
 function App() {
 
@@ -17,27 +20,39 @@ function App() {
       <MainNavigation showForm={setShowForm}/>
 
       <Layout>
-        <Switch>
-          
-          <Route exact path="/quotes">
-            <AllQuotes showForm={showForm} setShowForm={setShowForm}/>
-          </Route>
 
-          <Route path="/quotes/:quoteId">
-            <QuoteDetail/>
-          </Route>
+        <Suspense
+          fallback={
+            <div className='centered'>
+              <LoadingSpinner/>
+            </div>
+          }
+        >
 
-          <Route exact path="/new-quote">
-            <NewQuote/>
-          </Route>
+          <Switch>
+            
+            <Route exact path="/quotes">
+              <AllQuotes showForm={showForm} setShowForm={setShowForm}/>
+            </Route>
 
-          <Redirect from="/" to="/quotes"/>
+            <Route path="/quotes/:quoteId">
+              <QuoteDetail/>
+            </Route>
 
-          <Route path="*">
-            <NotFound/>
-          </Route>
+            <Route exact path="/new-quote">
+              <NewQuote/>
+            </Route>
 
-        </Switch>
+            <Redirect from="/" to="/quotes"/>
+
+            <Route path="*">
+              <NotFound/>
+            </Route>
+
+          </Switch>
+
+        </Suspense>
+
       </Layout>
     </div>
   );
