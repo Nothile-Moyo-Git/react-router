@@ -19,6 +19,7 @@ const QuoteItem = (props) => {
 
   const hideFormHandler = () => {
     setShowEditForm(false);
+    setIsEntering(false);
     props.setShowForm(false);
   }
 

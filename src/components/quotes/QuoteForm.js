@@ -36,7 +36,7 @@ const QuoteForm = (props) => {
         message={(location) => {
           return 'Are you sure you want to leave? All your entered data will be lost!';
           }}
-        />
+      />
       <Card className="card card--container card--gap-top">
         <form onFocus={formFocusedHandler} className="quote-form" onSubmit={submitFormHandler}>
           {props.isLoading && (
