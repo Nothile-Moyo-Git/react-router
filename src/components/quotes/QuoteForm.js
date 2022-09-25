@@ -32,7 +32,7 @@ const QuoteForm = (props) => {
   return (
     <>
       <Prompt 
-        when={isEntering} 
+        when={isEntering === true} 
         message={(location) => {
           return 'Are you sure you want to leave? All your entered data will be lost!';
           }}
